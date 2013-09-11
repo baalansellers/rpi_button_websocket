@@ -1,0 +1,17 @@
+Author: Alan Sellers
+Contact: baalansellers@hotmail.com
+
+This is the second iteration of my button project.
+The goal of the project is to create an interactive
+system that displays a countdown for our current
+sales goal of 20 contracts. 
+
+The system is made up of a Raspberry Pi and a
+Button. The RPi hosts a webserver capable of
+serving websockets and hosts a web page that uses
+a websocket for communication between a client
+(someone viewing the countdown) and the RPi which
+is also monitoring for Button presses. The count
+is decremented on each button press and a message
+is sent to all clients with the new "count" to be
+displayed.

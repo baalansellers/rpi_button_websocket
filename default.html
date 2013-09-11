@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<head>
+	<title>Countdown to 20</title>
+	<link href="/static/reset.css" rel="stylesheet" type="text/css" />
+	<link href="/static/style.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="/static/jquery-2.0.3.min.js"></script>
+	<script type="text/javascript">
+		if ("WebSocket" in window){
+			var ws = new WebSocket("ws://10.200.0.253:8888/websocket");
+			var messagecount = 0
+			ws.onmessage = function(evt) {
+				messagecount += 1;
+				jQuery(".hold").attr('id','pieSlice' + evt.data);
+				jQuery("#pieNumber").html(evt.data);
+				if (messagecount > 1) {
+					document.getElementById("horn").play();
+				}
+			}
+			ws.onopen = function() {
+				messagecount = 0;
+			}
+			ws.onclose = function() {
+				messagecount = 0;
+			}
+		}
+		else {
+			alert("WebSocket NOT support by your Browser!");
+		}
+	</script>
+</head>
+<html>
+	<body>
+		<div id="wrapper">
+			<h1>Deals till 20 deal goal</h1>
+						
+			<div class="pieContainer">
+			     <div class="pieBackground"></div>
+	
+			     <div id="pieSlice20" class="hold">
+			     	<div class="pie pie1"></div>
+			     	<div class="pie pie2"></div>
+			     </div>
+			     
+			     <div id="pieNumber">:(</div>
+			</div>
+	
+			<p>Copyright &copy; 2013 Overgroup Consulting, LLC. All Rights Reserved.</p>
+		</div>
+		<audio id="horn" preload="auto">
+			<source src="static/airhorn_long.mp3" type="audio/mpeg">
+		</audio>
+	</body>
+</html>
