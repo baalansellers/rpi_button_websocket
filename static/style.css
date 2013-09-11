@@ -111,17 +111,28 @@
 	}
 
 	.avControls {
-		color: #454545;
-		font-size: 12px;
-		text-align: right;
+		text-align: center;
 	}
 
-	#speaker {
-		float: left;
+	a#audiobutton {
+		padding-left: 20px;
 	}
 
 	a, a:link, a:visited, a:hover, a:active {
 		color: #454545;
+		font-size: 12px;
+	}
+
+	a.on {
+		color: #454545;
+		font-size: 12px;
+		background: url(http://thebutton.lan.overgroup.com/static/unmute_16x16.png) left center no-repeat;
+	}
+
+	a.off {
+		color: #454545;
+		font-size: 12px;
+		background: url(http://thebutton.lan.overgroup.com/static/mute_16x16.png) left center no-repeat;
 	}
      
 	/* Predefined Slices */    

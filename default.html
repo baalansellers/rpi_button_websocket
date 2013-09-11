@@ -5,41 +5,42 @@
 	<link href="/static/style.css" rel="stylesheet" type="text/css" />
 	<script type="text/javascript" src="/static/jquery-2.0.3.min.js"></script>
 	<script type="text/javascript">
-		var audioON = 1
-		if ("WebSocket" in window){
-			var ws = new WebSocket("ws://10.200.0.211:80/websocket");
-			var messagecount = 0
-			ws.onmessage = function(evt) {
-				messagecount += 1;
-				jQuery(".hold").attr('id','pieSlice' + evt.data);
-				jQuery("#pieNumber").html(evt.data);
-				if (messagecount > 1 && audioON == 1) {
-					document.getElementById("horn").play();
+		jQuery(document).ready(function () {
+			var audioON = 1
+			if ("WebSocket" in window){
+				var ws = new WebSocket("ws://10.200.0.253/websocket");
+				var messagecount = 0
+				ws.onmessage = function(evt) {
+					messagecount += 1;
+					jQuery(".hold").attr('id','pieSlice' + evt.data);
+					jQuery("#pieNumber").html(evt.data);
+					if (messagecount > 1 && audioON == 1) {
+						document.getElementById("horn").play();
+					}
+				}
+				ws.onopen = function() {
+					messagecount = 0;
+				}
+				ws.onclose = function() {
+					messagecount = 0;
 				}
 			}
-			ws.onopen = function() {
-				messagecount = 0;
-			}
-			ws.onclose = function() {
-				messagecount = 0;
-			}
-		}
-		else {
-			alert("WebSocket NOT support by your Browser!");
-		}
-
-		function toggleAudio() {
-			if (audioON == 1) {
-				audioON = 0;
-				jQuery("#speaker").attr('src','/static/mute_16x16.png');
-				jQuery("#speakerState").html('OFF');
-			}
 			else {
-				audioON = 1;
-				jQuery("#speaker").attr('src','/static/unmute_16x16.png');
-				jQuery("#speakerState").html('ON');
+				alert("WebSocket NOT support by your Browser!");
 			}
-		}
+	
+			jQuery("a#audiobutton").click(function () {
+				if (audioON == 0) {
+					jQuery(this).text('ON').removeClass('off');
+					audioON = 1;
+				}
+				else {
+					jQuery(this).text('OFF').addClass('off');
+					audioON = 0;
+				}
+				return false;
+			});
+		});
 	</script>
 </head>
 <html>
@@ -58,7 +59,7 @@
 			     <div id="pieNumber">:(</div>
 			</div>
 			<div class="avControls">
-				<a href="#" onclick="toggleAudio();"><img id="speaker" src="/static/unmute_16x16.png" /> <div id="speakerState">ON</div></a>
+				<a id="audiobutton" class="on" href="">ON</a>
 			</div>
 			<p>Copyright &copy; 2013 Overgroup Consulting, LLC. All Rights Reserved.</p>
 		</div>
