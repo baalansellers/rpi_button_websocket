@@ -44,10 +44,10 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
 
 application = tornado.web.Application([
 	(r"/", MainHandler),
-	(r'/static/(.*)', tornado.web.StaticFileHandler, {'path': '/home/pi/asynctornado/static'}),
-	(r"/(favicon\.ico)", tornado.web.StaticFileHandler, {'path': '/home/pi/asynctornado/static'}),
-	(r"/(apple-touch-icon\.png)", tornado.web.StaticFileHandler, {'path': '/home/pi/asynctornado/static'}),
-	(r"/(apple-touch-icon-precomposed\.png)", tornado.web.StaticFileHandler, {'path': '/home/pi/asynctornado/static'}),
+	(r'/static/(.*)', tornado.web.StaticFileHandler, {'path': '/home/pi/Projects/TheButton_WebSocket/static'}),
+	(r"/(favicon\.ico)", tornado.web.StaticFileHandler, {'path': '/home/pi/Projects/TheButton_WebSocket/static'}),
+	(r"/(apple-touch-icon\.png)", tornado.web.StaticFileHandler, {'path': '/home/pi/Projects/TheButton_WebSocket/static'}),
+	(r"/(apple-touch-icon-precomposed\.png)", tornado.web.StaticFileHandler, {'path': '/home/pi/Projects/TheButton_WebSocket/static'}),
 	(r"/websocket", WebSocketHandler),
 ])
 
@@ -69,5 +69,5 @@ def testmethod():
 if __name__ == "__main__":
 	threading.Thread(target=testmethod).start()
 	http_server = tornado.httpserver.HTTPServer(application)
-	http_server.listen(8888)
+	http_server.listen(80)
 	tornado.ioloop.IOLoop.instance().start()

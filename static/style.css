@@ -109,6 +109,20 @@
 		border-radius: 250px;
 		clip: rect(0px, 500px, 500px, 250px);
 	}
+
+	.avControls {
+		color: #454545;
+		font-size: 12px;
+		text-align: right;
+	}
+
+	#speaker {
+		float: left;
+	}
+
+	a, a:link, a:visited, a:hover, a:active {
+		color: #454545;
+	}
      
 	/* Predefined Slices */    
 	
