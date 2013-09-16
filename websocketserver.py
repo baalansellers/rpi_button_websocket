@@ -39,9 +39,6 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
 			except:
 				print("Error sending message")
 
-	def on_message(self, message):
-		self.write_message(u"Server echoed: " + message)
-
 application = tornado.web.Application([
 	(r"/", MainHandler),
 	(r'/static/(.*)', tornado.web.StaticFileHandler, {'path': '/home/pi/Projects/TheButton_WebSocket/static'}),
@@ -51,7 +48,7 @@ application = tornado.web.Application([
 	(r"/websocket", WebSocketHandler),
 ])
 
-def testmethod():
+def ButtonMonitor():
 	index = 20
 	button = Button.Button(11)
 	repo = Repository.Repository()
@@ -67,7 +64,7 @@ def testmethod():
 		time.sleep(0.05)
 
 if __name__ == "__main__":
-	threading.Thread(target=testmethod).start()
+	threading.Thread(target=ButtonMonitor).start()
 	http_server = tornado.httpserver.HTTPServer(application)
 	http_server.listen(80)
 	tornado.ioloop.IOLoop.instance().start()
